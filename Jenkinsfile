@@ -10,12 +10,13 @@ pipeline
                 sh 'docker pull nginx'
             }
         }
-    stage('to run container')
-    {
-        steps
+        stage('to run container')
         {
-            sh 'docker run -it -d --name app -p 80:80 nginx'
-        }
-    }
-    }
+            steps
+            {
+                sh 'docker run -it -d --name app -p 80:80 nginx'
+            }
+        }
+    }
 }
+    
