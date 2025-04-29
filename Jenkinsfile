@@ -10,8 +10,9 @@ pipeline {
 
         stage('run the container') {
             steps { 
-                 sh 'docker stop -it -d --name app -p 80:80 nginx'
-                 sh ' docker stop -it -d --name app -p 80:80 nginx'
+                 sh 'docker stop nginx'
+                 sh ' docker rm nginx'
+                 sh 'sudo docker run -it -d --name app -p 80:80 nginx'
             }
         }
     }
