@@ -8,21 +8,22 @@ pipeline {
             }
         }
 
-        stage('stop the container') {
+        stage('stop the container if exists') {
             steps { 
-                 sh 'docker stop nginx'
+                sh 'sudo docker stop app || true'
             }
         }
-      stage('remove the container') {
+
+        stage('remove the container if exists') {
             steps { 
-             sh ' docker rm nginx' 
-            }
-      }
-        stage('to run docker'){
-            steps{
-                sh 'docker run -it -d --name app -p 80:80 nginx'
+                sh 'sudo docker rm app || true'
             }
         }
-                 
+
+        stage('run the container') {
+            steps {
+                sh 'sudo docker run -it -d --name app -p 80:80 nginx'
+            }
+        }
     }
 }
